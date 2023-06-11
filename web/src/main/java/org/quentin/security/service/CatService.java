@@ -1,6 +1,6 @@
 package org.quentin.security.service;
 
-import org.quentin.security.dto.FoodCategory;
+import org.quentin.security.domain.dto.FoodCategory;
 
 import java.util.List;
 

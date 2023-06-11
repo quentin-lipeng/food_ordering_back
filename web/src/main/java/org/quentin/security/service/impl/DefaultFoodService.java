@@ -1,8 +1,9 @@
 package org.quentin.security.service.impl;
 
-import org.quentin.security.dto.Food;
+import org.quentin.security.domain.dto.Food;
 import org.quentin.security.mapper.FoodMapper;
 import org.quentin.security.service.FoodService;
+import org.quentin.security.domain.vo.FoodWithCat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,12 @@ public class DefaultFoodService implements FoodService {
     }
 
     @Override
-    public List<Food> getFoodByCategory(String category) {
-        return foodMapper.foodsByCategory(category);
+    public List<Food> getFoodByCategoryName(String categoryName) {
+        return foodMapper.foodsByCategoryName(categoryName);
+    }
+
+    @Override
+    public FoodWithCat getFoodByCategoryLabel(String categoryLabel) {
+        return foodMapper.foodsByCateLabel(categoryLabel);
     }
 }

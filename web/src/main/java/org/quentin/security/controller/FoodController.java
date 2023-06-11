@@ -1,11 +1,11 @@
 package org.quentin.security.controller;
 
-import org.quentin.security.common.CommonResponse;
-import org.quentin.security.dto.Food;
-import org.quentin.security.dto.FoodCategory;
-import org.quentin.security.pojo.FoodResponse;
+import org.quentin.security.domain.vo.CommonResponse;
+import org.quentin.security.domain.dto.Food;
+import org.quentin.security.domain.dto.FoodCategory;
 import org.quentin.security.service.CatService;
 import org.quentin.security.service.FoodService;
+import org.quentin.security.domain.vo.FoodWithCat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/food")
@@ -38,33 +36,18 @@ public class FoodController {
         return ResponseEntity.ok(commonResponse);
     }
 
-    /**
-     * @param cat category's label
-     * @return todo add javadoc
-     */
     @GetMapping("/category/{cat}")
-    public ResponseEntity<CommonResponse<FoodResponse>> getByCat(@PathVariable String cat) {
+    public ResponseEntity<CommonResponse<FoodWithCat>> getByCatDemo(@PathVariable String cat) {
+
+        FoodWithCat foodWithCat;
         if ("all".equals(cat)) {
-            FoodCategory category = new FoodCategory();
-            category.setCatName("all");
-            List<Food> foods = foodService.getAllFoods();
-            CommonResponse<FoodResponse> commonResponse =
-                    new CommonResponse<>("foods", new FoodResponse(category, foods));
-            return ResponseEntity.ok(commonResponse);
+            List<Food> allFoods = foodService.getAllFoods();
+            foodWithCat = new FoodWithCat("all", allFoods);
+        } else {
+            foodWithCat = foodService.getFoodByCategoryLabel(cat);
         }
-
-        FoodCategory existCat = catService.getCatByLabel(cat);
-        if (Objects.isNull(existCat)) {
-            CommonResponse<FoodResponse> commonResponse =
-                    new CommonResponse<>("none",
-                            new FoodResponse(new FoodCategory(), Collections.emptyList()));
-            return ResponseEntity.badRequest().body(commonResponse);
-        }
-
-        List<Food> byCategory = foodService.getFoodByCategory(existCat.getCatLabel());
-        CommonResponse<FoodResponse> commonResponse =
-                new CommonResponse<>("by cate", new FoodResponse(existCat, byCategory));
-        return ResponseEntity.ok(commonResponse);
+        CommonResponse<FoodWithCat> allFoodsResponse = new CommonResponse<>("all foods", foodWithCat);
+        return ResponseEntity.ok(allFoodsResponse);
     }
 
 }

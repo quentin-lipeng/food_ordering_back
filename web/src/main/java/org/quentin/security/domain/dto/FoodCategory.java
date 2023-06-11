@@ -1,4 +1,4 @@
-package org.quentin.security.dto;
+package org.quentin.security.domain.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

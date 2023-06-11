@@ -1,4 +1,4 @@
-package org.quentin.security.dto;
+package org.quentin.security.domain.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -15,7 +15,7 @@ public class Food implements Serializable {
     private Integer foodId;
     private String foodName;
     private String foodDesp;
-    private Float foodPrice;
+    private Double foodPrice;
     private String foodImg;
     private Timestamp createTime;
 
@@ -43,11 +43,11 @@ public class Food implements Serializable {
         this.foodDesp = foodDesp;
     }
 
-    public Float getFoodPrice() {
+    public Double getFoodPrice() {
         return foodPrice;
     }
 
-    public void setFoodPrice(Float foodPrice) {
+    public void setFoodPrice(Double foodPrice) {
         this.foodPrice = foodPrice;
     }
 

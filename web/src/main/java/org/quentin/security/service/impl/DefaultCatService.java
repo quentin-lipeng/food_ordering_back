@@ -1,9 +1,7 @@
 package org.quentin.security.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.interfaces.Compare;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.quentin.security.dto.FoodCategory;
+import org.quentin.security.domain.dto.FoodCategory;
 import org.quentin.security.mapper.CatMapper;
 import org.quentin.security.service.CatService;
 import org.slf4j.Logger;

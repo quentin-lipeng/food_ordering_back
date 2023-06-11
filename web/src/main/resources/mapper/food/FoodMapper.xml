@@ -2,11 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.quentin.security.mapper.FoodMapper">
 
-    <select id="foodsByCategory" parameterType="String" resultType="Food">
+    <resultMap id="foodResultMapper" type="Food">
+        <id property="foodId" column="food_id"/>
+        <result property="foodName" column="food_name" jdbcType="VARCHAR" javaType="String"/>
+        <result property="foodDesp" column="food_desp" jdbcType="VARCHAR" javaType="String"/>
+        <result property="foodPrice" column="food_price" jdbcType="FLOAT" javaType="Double"/>
+        <result property="foodImg" column="food_img" jdbcType="VARCHAR" javaType="String"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+    </resultMap>
+
+    <resultMap id="catWithFoods" type="FoodWithCat">
+        <result property="catLabel" column="cat_label" javaType="String"/>
+        <collection property="foods" javaType="ArrayList" resultMap="foodResultMapper"/>
+    </resultMap>
+
+    <select id="foodsByCategoryName" parameterType="String" resultType="Food">
         SELECT F.*
         FROM food_info I
                  join food F on I.food_id = F.food_id
                  join food_category C on I.cat_id = C.cat_id
-        WHERE C.cat_label = #{category}
+        WHERE C.cat_name = #{categoryName}
+    </select>
+
+    <select id="foodsByCateLabel" parameterType="String" resultMap="catWithFoods">
+        SELECT C.cat_label,
+               F.food_id,
+               F.food_name,
+               F.food_desp,
+               F.food_price,
+               F.food_img,
+               F.create_time
+        FROM food_info I
+                 join food F on I.food_id = F.food_id
+                 join food_category C on I.cat_id = C.cat_id
+        WHERE C.cat_label = #{catLabel};
     </select>
 </mapper>

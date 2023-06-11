@@ -32,4 +32,54 @@ create table food_ordering.food_info
     food_id int not null
 );
 
+drop table if exists food_ordering.user;
+
+create table food_ordering.user
+(
+    user_id  int auto_increment comment 'user id'
+        primary key,
+    username varchar(32)  not null comment 'user name',
+    password varchar(128) not null comment 'user password',
+    salt     varchar(64)  null
+)
+    comment 'user';
+
+drop table if exists food_ordering.user_info;
+
+create table food_ordering.user_info
+(
+    info_id     int auto_increment comment 'info id'
+        primary key,
+    user_id     int          not null comment 'use''s id',
+    email       varchar(128) null comment 'user email',
+    phone_number varchar(20)  null comment 'user''s phone number'
+)
+    comment 'user other information';
+
+drop table if exists food_ordering.user_authz;
+
+create table food_ordering.user_authz
+(
+    authz_id int auto_increment
+        primary key,
+    user_id  int         null comment 'user''s id',
+    role     varchar(64) null comment 'user''s role name'
+)
+    comment 'user role and resource and more';
+
+drop table if exists food_ordering.auth_token;
+
+create table food_ordering.auth_token
+(
+    token_id   int auto_increment comment 'token id'
+        primary key,
+    token      varchar(256) null,
+    token_type varchar(32) null,
+    revoked    int(8)      null,
+    expired    int(8)      null,
+    user_id    int         null
+)
+    comment 'authtication token';
+
+
 

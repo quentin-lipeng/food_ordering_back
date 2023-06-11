@@ -8,17 +8,37 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: password
-    url: jdbc:mysql://localhost:3307/food_ordering?serverTimezone=UTC
+    url: jdbc:mysql://172.17.235.188:3307/food_ordering?serverTimezone=UTC
   sql:
     init:
       schema-locations: classpath:db/schema-mysql.sql
       data-locations: classpath:db/data-mysql.sql
       platform: mysql
       mode: always
+  data:
+    redis:
+      port: 6479
+      host: 172.17.235.188
+      password: skywalker
+  session:
+    store-type: redis
+    redis:
+      flush-mode: on-save
+      namespace: spring:session
+security:
+  sessions: NEVER
 logging:
   level:
     org.quentin.security: trace
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
-  type-aliases-package: org.quentin.security.dto
+  type-aliases-package: org.quentin.security.domain
+debug: true
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days

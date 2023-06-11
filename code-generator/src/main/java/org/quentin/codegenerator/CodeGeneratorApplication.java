@@ -47,11 +47,10 @@ public class CodeGeneratorApplication {
                     }))
                     .packageConfig(builder -> {
                         builder.parent("org.quentin.security") // 设置父包名
-                                .moduleName("web") // 设置父包模块名
                                 .pathInfo(Collections.singletonMap(OutputFile.xml, "/home/quinlan/code/generator")); // 设置mapperXml生成路径
                     })
                     .strategyConfig(builder -> {
-                        builder.addInclude("food") // 设置需要生成的表名
+                        builder.addInclude("user") // 设置需要生成的表名
                                 .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                     })
                     .execute();
