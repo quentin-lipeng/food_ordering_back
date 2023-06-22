@@ -1,4 +1,4 @@
-package org.quentin.security.service;
+package org.quentin.security.service.auth;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;

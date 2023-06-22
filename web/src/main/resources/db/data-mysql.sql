@@ -57,3 +57,12 @@ VALUES (3, 1),
        (4, 21),
        (4, 22)
 ;
+
+INSERT INTO food_ordering.user (user_id, username, password, salt)
+VALUES (1, 'mike@qq.com', '$2a$10$GCmxbIUHLk3p8R.r4heSt.FhaGx4dbHc2Q4wvGL8ngdncbgPO1X9i', null);
+
+INSERT INTO food_ordering.user_info (info_id, user_id, email, phone_number)
+VALUES (1, 1, 'mike@qq.com', '');
+
+INSERT INTO food_ordering.user_authz (authz_id, user_id, role)
+VALUES (1, 1, 'USER');

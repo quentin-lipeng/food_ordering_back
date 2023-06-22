@@ -1,4 +1,4 @@
-package org.quentin.security.service;
+package org.quentin.security.service.auth;
 
 import org.springframework.stereotype.Service;
 

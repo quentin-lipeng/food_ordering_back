@@ -10,8 +10,8 @@ import org.springframework.session.web.http.HttpSessionIdResolver;
 /**
  * it will generate an uuid named x-auth-token in RedisSessionRepository;
  */
-//@Configuration
-//@EnableRedisHttpSession
+@Configuration
+@EnableRedisHttpSession
 public class CustomSessionConfig {
 
     @Bean
@@ -19,8 +19,4 @@ public class CustomSessionConfig {
         return HeaderHttpSessionIdResolver.xAuthToken();
     }
 
-//    @Bean
-//    public CustomRedisSessionRepository customRedisSessionRepository() {
-//        return new CustomRedisSessionRepository();
-//    }
 }

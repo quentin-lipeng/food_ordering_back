@@ -11,7 +11,7 @@ import java.util.Optional;
 
 import org.quentin.security.domain.dto.Token;
 import org.quentin.security.mapper.TokenMapper;
-import org.quentin.security.service.JwtService;
+import org.quentin.security.service.auth.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
@@ -59,7 +59,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
             var isTokenValid = Optional.ofNullable(
                             tokenMapper.selectOne(new QueryWrapper<Token>().eq("token", jwt)))
-                    .map(t -> !t.getExpired().equals(1) && !t.getRevoked().equals(1)).orElse(false);
+                    .map(t -> !t.getExpired() && !t.getRevoked()).orElse(false);
             if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
                 LOGGER.info("jwt filter !!!");
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

@@ -25,6 +25,7 @@ spring:
     redis:
       flush-mode: on-save
       namespace: spring:session
+    timeout: 120s
 security:
   sessions: NEVER
 logging:

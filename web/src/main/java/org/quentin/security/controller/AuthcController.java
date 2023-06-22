@@ -1,14 +1,12 @@
 package org.quentin.security.controller;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.quentin.security.domain.vo.AuthenticationRequest;
 import org.quentin.security.domain.vo.AuthenticationResponse;
 import org.quentin.security.domain.vo.RegisterRequest;
-import org.quentin.security.domain.vo.UserDetail;
-import org.quentin.security.service.AuthService;
+import org.quentin.security.service.auth.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
